@@ -2,16 +2,10 @@
   <h2 class='card-country__name'>
     <img src='{{flags.svg}}' alt='flag' width='50px' />{{name.official}}</h2>
   <ul class='card-country__list'>
-    <li>
-      <p class='card-country__item'>Capital: {{capital}}</p>
-    </li>
-    <li>
-      <p class='card-country__item'>Population: {{population}}</p>
-    </li>
-    <li>
-      <p class='card-country__item'>Languages:{{#each languages}}
+    <li><p class='card-country__item'>Capital: {{capital}}</p></li>
+    <li><p class='card-country__item'>Population: {{population}}</p></li>
+    <li><p class='card-country__item'>Languages:{{#each languages}}
           {{this}}{{#unless @last}}, {{/unless}}
-        {{/each}}</p>
-    </li>
+        {{/each}}</p></li>
   </ul>
 {{/each}}
