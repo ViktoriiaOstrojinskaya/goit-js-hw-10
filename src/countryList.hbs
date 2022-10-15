@@ -1,4 +1,11 @@
 {{#each this}}
-  <h2 class='card-country__name'>
-    <img src='{{flags.svg}}' alt='flag' width='30px' />{{name.official}}</h2>
+  <li>
+    <h2 class='card-list__title'>
+      <img
+        src='{{flags.svg}}'
+        alt='flag'
+        width='30px'
+        height='auto'
+      />{{name.official}}</h2>
+  </li>
 {{/each}}
