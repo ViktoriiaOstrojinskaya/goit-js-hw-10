@@ -29,11 +29,12 @@ li {
 }
 
 img {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .card-country__list {
   margin-left: 30px;
+  line-height: 2;
 }
 
 .card-list__title {

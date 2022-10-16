@@ -1,6 +1,7 @@
 import './css/styles.css';
 
 import debounce from 'lodash.debounce';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import API from './fetchCountries';
 import countryCard from './countryCard.hbs';
@@ -16,22 +17,16 @@ const refs = {
 
 refs.input.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 
-function onInputCountry(event) {
+function onInputCountry() {
   const name = refs.input.value.trim();
-
-  API.fetchCountries(name)
-    .then(showProfile)
-    .catch(error => console.log(error));
-
-  if (refs.input.value === '') {
-    refs.listCountries.innerHTML = '';
-    refs.infoCountry.innerHTML = '';
-  }
+  API.fetchCountries(name).then(showResult).catch(onFetchError);
 }
 
-function showProfile(country) {
+function showResult(country) {
   if (country.length >= 10) {
-    console.log('Too many matches found. Please enter a more specific name.');
+    Notify.info('Too many matches found. Please enter a more specific name.', {
+      timeout: 1000,
+    });
   } else if (country.length >= 2 && country.length <= 9) {
     createCountryList(country);
     refs.infoCountry.innerHTML = '';
@@ -49,4 +44,12 @@ function createCountryList(country) {
 function createCountryCard(country) {
   const markupCard = countryCard(country);
   refs.infoCountry.innerHTML = markupCard;
+}
+
+function onFetchError(error) {
+  Notify.failure('Oops, there is no country with that name', {
+    timeout: 1000,
+  });
+  refs.listCountries.innerHTML = '';
+  refs.infoCountry.innerHTML = '';
 }
