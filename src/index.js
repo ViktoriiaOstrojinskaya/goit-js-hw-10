@@ -19,6 +19,13 @@ refs.input.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 
 function onInputCountry() {
   const name = refs.input.value.trim();
+
+  if (!name) {
+    refs.listCountries.innerHTML = '';
+    refs.infoCountry.innerHTML = '';
+    return;
+  }
+
   API.fetchCountries(name).then(showResult).catch(onFetchError);
 }
 
